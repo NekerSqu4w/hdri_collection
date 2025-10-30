@@ -20,7 +20,7 @@ Get-ChildItem -Path $inputDir -Filter "*.hdr" | ForEach-Object {
         Write-Host "converting file $outputFileName" -ForegroundColor Yellow
 		
 		$startTime = Get-Date
-		& ffmpeg -loglevel error -i $inputFile -vf "tonemap=mobius,eq=brightness=0.05:saturation=1.2:contrast=1.0,format=yuvj420p" -q:v 1 $outputFile
+		& ffmpeg -loglevel error -i $inputFile -vf "tonemap=hable:desat=0,format=yuvj420p,scale=in_range=full:out_range=full" -q:v 1 $outputFile
 		$endTime = Get-Date
 		$duration = $endTime - $startTime
 		
